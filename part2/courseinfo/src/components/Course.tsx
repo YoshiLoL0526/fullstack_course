@@ -1,4 +1,5 @@
 import Part, { PartProps } from "./Part.tsx";
+import Total from "./Total.tsx";
 
 interface CourseData {
     id: number;
@@ -19,6 +20,7 @@ const Course: React.FC<CourseProps> = ({ course }) => {
                     <Part key={part.id} id={part.id} name={part.name} exercises={part.exercises} />
                 ))}
             </ul>
+            <Total total={course.parts.reduce((sum, part) => sum + part.exercises, 0)} />
         </div>
     );
 };
