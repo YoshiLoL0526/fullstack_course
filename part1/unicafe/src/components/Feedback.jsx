@@ -14,11 +14,11 @@ const Feedback = ({ feedback, setFeedback }) => {
     return (
         <div>
             <h1>Give feedback</h1>
-            <ul>
-                <li><Button text='Good' action={() => goodFeedback()} /></li>
-                <li><Button text='Bad' action={() => badFeedback()} /></li>
-                <li><Button text='Neutral' action={() => neutralFeedback()} /></li>
-            </ul>
+            <div>
+                <Button text='Good' action={() => goodFeedback()} />
+                <Button text='Bad' action={() => badFeedback()} />
+                <Button text='Neutral' action={() => neutralFeedback()} />
+            </div>
         </div>
     )
 }

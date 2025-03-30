@@ -1,3 +1,5 @@
+import StatisticLine from "./StatisticLine.jsx"
+
 const Statistics = ({ feedback }) => {
     const all = feedback.good + feedback.bad + feedback.neutral
     const average = feedback.good * 1 + feedback.bad * -1 + feedback.neutral * 0
@@ -15,14 +17,14 @@ const Statistics = ({ feedback }) => {
     return (
         <div>
             <h1>Statistics</h1>
-            <ul>
-                <li>Good: {feedback.good}</li>
-                <li>Bad: {feedback.bad}</li>
-                <li>Neutral: {feedback.neutral}</li>
-                <li>All: {all}</li>
-                <li>Average: {average}</li>
-                <li>Positive: {positive} %</li>
-            </ul>
+            <div>
+                <StatisticLine text='Good' value={feedback.good} />
+                <StatisticLine text='Neutral' value={feedback.neutral} />
+                <StatisticLine text='Bad' value={feedback.bad} />
+                <StatisticLine text='All' value={all} />
+                <StatisticLine text='Average' value={average} />
+                <StatisticLine text='Positive' value={`${positive} %`} />
+            </div>
         </div>
     )
 }
