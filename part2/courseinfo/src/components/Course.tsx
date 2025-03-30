@@ -1,10 +1,10 @@
-import Part, { PartProps } from "./Part.tsx";
+import Part, { PartData } from "./Part.tsx";
 import Total from "./Total.tsx";
 
 interface CourseData {
     id: number;
     name: string;
-    parts: PartProps[];
+    parts: PartData[];
 }
 
 interface CourseProps {
@@ -17,7 +17,7 @@ const Course: React.FC<CourseProps> = ({ course }) => {
             <h1>{course.name}</h1>
             <ul>
                 {course.parts.map((part) => (
-                    <Part key={part.id} id={part.id} name={part.name} exercises={part.exercises} />
+                    <Part key={part.id} part={part} />
                 ))}
             </ul>
             <Total total={course.parts.reduce((sum, part) => sum + part.exercises, 0)} />

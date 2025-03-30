@@ -1,12 +1,16 @@
-export interface PartProps {
+export interface PartData {
     id: number;
     name: string;
     exercises: number;
 }
 
-const Part: React.FC<PartProps> = ({ name, exercises }) => (
+export interface PartProps {
+    part: PartData;
+}
+
+const Part: React.FC<PartProps> = ({ part }) => (
     <li>
-        {name} {exercises}
+        {part.name} {part.exercises}
     </li>
 );
 
