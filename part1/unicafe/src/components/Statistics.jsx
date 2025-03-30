@@ -17,14 +17,28 @@ const Statistics = ({ feedback }) => {
     return (
         <div>
             <h1>Statistics</h1>
-            <div>
-                <StatisticLine text='Good' value={feedback.good} />
-                <StatisticLine text='Neutral' value={feedback.neutral} />
-                <StatisticLine text='Bad' value={feedback.bad} />
-                <StatisticLine text='All' value={all} />
-                <StatisticLine text='Average' value={average} />
-                <StatisticLine text='Positive' value={`${positive} %`} />
-            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <StatisticLine text='Good' value={feedback.good} />
+                    </tr>
+                    <tr>
+                        <StatisticLine text='Neutral' value={feedback.neutral} />
+                    </tr>
+                    <tr>
+                        <StatisticLine text='Bad' value={feedback.bad} />
+                    </tr>
+                    <tr>
+                        <StatisticLine text='All' value={all} />
+                    </tr>
+                    <tr>
+                        <StatisticLine text='Average' value={average} />
+                    </tr>
+                    <tr>
+                        <StatisticLine text='Positive' value={`${positive} %`} />
+                    </tr>
+                </tbody>
+            </table>
         </div>
     )
 }
