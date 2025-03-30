@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import Feedback from './components/Feedback.jsx'
-import Statistics from './components/Statistics.jsx'
+import Feedback from './components/Feedback.tsx'
+import Statistics from './components/Statistics.tsx'
 
 function App() {
   const [feedback, setFeedback] = useState({ good: 0, bad: 0, neutral: 0 })

@@ -1,6 +1,14 @@
-import StatisticLine from "./StatisticLine.jsx"
+import StatisticLine from "./StatisticLine.tsx"
 
-const Statistics = ({ feedback }) => {
+interface StatisticsProps {
+    feedback: {
+        good: number
+        neutral: number
+        bad: number
+    }
+}
+
+const Statistics: React.FC<StatisticsProps> = ({ feedback }) => {
     const all = feedback.good + feedback.bad + feedback.neutral
     const average = feedback.good * 1 + feedback.bad * -1 + feedback.neutral * 0
     const positive = (feedback.good / all) * 100

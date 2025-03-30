@@ -1,6 +1,15 @@
 import Button from './Button.jsx'
 
-const Feedback = ({ feedback, setFeedback }) => {
+interface FeedbackProps {
+    feedback: {
+        good: number
+        bad: number
+        neutral: number
+    }
+    setFeedback: (feedback: { good: number; bad: number; neutral: number }) => void
+}
+
+const Feedback: React.FC<FeedbackProps> = ({ feedback, setFeedback }) => {
     const goodFeedback = () => {
         setFeedback({ ...feedback, good: feedback.good + 1 })
     }
@@ -15,9 +24,9 @@ const Feedback = ({ feedback, setFeedback }) => {
         <div>
             <h1>Give feedback</h1>
             <div>
-                <Button text='Good' action={() => goodFeedback()} />
-                <Button text='Bad' action={() => badFeedback()} />
-                <Button text='Neutral' action={() => neutralFeedback()} />
+                <Button text='Good' action={goodFeedback} />
+                <Button text='Bad' action={badFeedback} />
+                <Button text='Neutral' action={neutralFeedback} />
             </div>
         </div>
     )
