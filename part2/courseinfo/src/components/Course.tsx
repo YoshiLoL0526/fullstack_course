@@ -1,4 +1,6 @@
-import Part, { PartData } from "./Part.tsx";
+import Header from "./Header.tsx";
+import Content from "./Content.tsx";
+import { PartData } from "./Part.tsx";
 import Total from "./Total.tsx";
 
 interface CourseData {
@@ -14,12 +16,8 @@ interface CourseProps {
 const Course: React.FC<CourseProps> = ({ course }) => {
     return (
         <div>
-            <h1>{course.name}</h1>
-            <ul>
-                {course.parts.map((part) => (
-                    <Part key={part.id} part={part} />
-                ))}
-            </ul>
+            <Header name={course.name} />
+            <Content parts={course.parts} />
             <Total total={course.parts.reduce((sum, part) => sum + part.exercises, 0)} />
         </div>
     );
