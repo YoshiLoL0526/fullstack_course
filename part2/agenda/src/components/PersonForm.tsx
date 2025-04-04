@@ -10,9 +10,10 @@ export interface Person {
 interface PersonFormProps {
     persons: Person[];
     setPersons: React.Dispatch<React.SetStateAction<Person[]>>;
+    setNotification: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const PersonForm: React.FC<PersonFormProps> = ({ persons, setPersons }) => {
+const PersonForm: React.FC<PersonFormProps> = ({ persons, setPersons, setNotification }) => {
     const [name, setName] = useState('')
     const [number, setNumber] = useState('')
 
@@ -33,6 +34,10 @@ const PersonForm: React.FC<PersonFormProps> = ({ persons, setPersons }) => {
             if (confirmPut) {
                 personService.updatePerson(person.id, { ...person, number }).then(updatedPerson => {
                     setPersons(persons.map(xPerson => xPerson.id !== person.id ? xPerson : updatedPerson))
+                    setNotification(`Updated ${updatedPerson.name}`)
+                    setTimeout(() => {
+                        setNotification(null)
+                    }, 2000)
                 })
             }
         }
@@ -41,6 +46,10 @@ const PersonForm: React.FC<PersonFormProps> = ({ persons, setPersons }) => {
 
             personService.createPerson(Person).then(newPerson => {
                 setPersons(persons.concat(newPerson))
+                setNotification(`Added ${newPerson.name}`)
+                setTimeout(() => {
+                    setNotification(null)
+                }, 2000)
             })
         }
 
