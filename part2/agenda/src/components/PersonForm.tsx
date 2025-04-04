@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import personService from '../services/persons.tsx'
 
 export interface Person {
     name: string;
@@ -26,16 +27,23 @@ const PersonForm: React.FC<PersonFormProps> = ({ persons, setPersons }) => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        const pos = persons.findIndex(person => person.name === name)
-        if (pos !== -1) {
-            alert(`${name} is already added to phonebook`)
-            return
+        const person = persons.find(person => person.name === name)
+        if (person) {
+            const confirmPut = window.confirm(`${person.name} is already added to notebook, repalce the old number with a new one?`);
+            if (confirmPut) {
+                personService.updatePerson(person.id, { ...person, number }).then(updatedPerson => {
+                    setPersons(persons.map(xPerson => xPerson.id !== person.id ? xPerson : updatedPerson))
+                })
+            }
+        }
+        else {
+            const Person = { name: name, number: number, id: persons.length > 0 ? Math.max(...persons.map(p => p.id)) + 1 : 1 }
+
+            personService.createPerson(Person).then(newPerson => {
+                setPersons(persons.concat(newPerson))
+            })
         }
 
-        const Person = { name: name, number: number, id: persons.length > 0 ? Math.max(...persons.map(p => p.id)) + 1 : 1 }
-        const newPersons = persons.concat(Person)
-
-        setPersons(newPersons)
         setName('')
         setNumber('')
     }

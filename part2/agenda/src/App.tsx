@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Filter from './components/Filter.tsx'
 import PersonForm, { Person } from './components/PersonForm.tsx'
 import Persons from './components/Persons.tsx'
+import personsService from './services/persons.tsx'
 
 const App = () => {
   const [persons, setPersons] = useState<Person[]>([])
   const [filterName, setFilterName] = useState('')
 
   useEffect(() => {
-    axios.get('http://localhost:3001/persons')
-      .then((response) => {
-        setPersons(response.data)
-      }
-      )
+    personsService.getAllPersons().then(initialPersons => {
+      setPersons(initialPersons)
+    }).catch(error => alert(`Error getting persons: ${error}`))
   }, [])
 
   return (
@@ -25,7 +23,7 @@ const App = () => {
       <PersonForm persons={persons} setPersons={setPersons} />
 
       <h3>Numbers</h3>
-      <Persons persons={persons} filterName={filterName} />
+      <Persons persons={persons} filterName={filterName} setPersons={setPersons} />
     </div>
   )
 }
