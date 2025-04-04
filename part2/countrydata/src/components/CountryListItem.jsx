@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CountryDetail from "./CountryDetail";
+import Button from './Button';
 
 const CountryListItem = ({ country }) => {
     const [showDetail, setShowDetail] = useState(false)
@@ -17,7 +18,7 @@ const CountryListItem = ({ country }) => {
         ) : (
             <div>
                 <h3>{country.name.common}</h3>
-                <button onClick={onClick}>Hide</button>
+                <Button text={showDetail ? "Hide" : "Show"} onClick={onClick} />
                 <CountryDetail country={country} />
             </div>
         )

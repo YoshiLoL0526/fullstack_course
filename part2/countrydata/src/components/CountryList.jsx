@@ -25,18 +25,14 @@ const CountryList = ({ filter }) => {
         })
     }, [filter])
 
-    const filteredCountries = countries.filter(country =>
-        country.name.common.toLowerCase().includes(filter.toLowerCase())
-    )
-
     return (
         <div>
-            {filteredCountries.length > 10 ? (
+            {countries.length > 10 ? (
                 <p>Too many matches, specify another filter</p>
-            ) : filteredCountries.length === 1 ? (
-                <CountryDetail country={filteredCountries[0]} />
+            ) : countries.length === 1 ? (
+                <CountryDetail country={countries[0]} />
             ) : (
-                filteredCountries.map(country => (
+                countries.map(country => (
                     <CountryListItem key={country.name.common} country={country} />
                 ))
             )}

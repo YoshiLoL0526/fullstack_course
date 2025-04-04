@@ -1,24 +1,25 @@
 import { useState, useEffect } from 'react';
 import weatherService from '../services/weatherService';
+import { kelvinToCelsius } from '../utils/temperatureUtils';
 
 const CountryDetail = ({ country }) => {
     const [weather, setWeather] = useState(null);
 
     useEffect(() => {
+        if (!country.capital || country.capital.length === 0) {
+            console.log("No capital available for the country.");
+            return;
+        }
+
         weatherService.getWeather(country.capital[0]).then(response => {
             if (!response) {
-                console.error("Weather data not available.");
-                return;
+                throw new Error("Weather data not available");
             }
             setWeather(response.data);
         }).catch(error => {
             console.log("Error fetching weather data:", error);
         });
     }, [country.capital]);
-
-    const kelvinToCelsius = (kelvin) => {
-        return Math.round(kelvin - 273.15);
-    }
 
     return (
         <div>
