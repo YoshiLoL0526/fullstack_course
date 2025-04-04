@@ -19,6 +19,9 @@ const CountryList = ({ filter }) => {
                 country.name.common.toLowerCase().includes(filter.toLowerCase())
             )
             setCountries(filteredCountries)
+        }).catch(error => {
+            console.log("Error fetching countries:", error)
+            setCountries([])
         })
     }, [filter])
 
