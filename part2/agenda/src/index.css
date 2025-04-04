@@ -68,11 +68,18 @@ button:focus-visible {
 }
 
 .notification {
-  color: rgb(6, 197, 6);
   background: lightgrey;
   font-size: 20px;
   border-style: solid;
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
+}
+
+.error {
+  color: rgb(216, 65, 65);
+}
+
+.success {
+  color: rgb(37, 230, 37);
 }

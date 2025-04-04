@@ -1,15 +1,16 @@
 import React from 'react';
 import { Person } from './PersonForm.tsx';
 import personsService from '../services/persons.tsx'
+import { NotificationMessage } from './Notification.tsx';
 
 export interface PersonsProps {
     persons: Person[]
     filterName: string
     setPersons: React.Dispatch<React.SetStateAction<Person[]>>
+    setNotification: React.Dispatch<React.SetStateAction<NotificationMessage>>
 }
 
-const Persons: React.FC<PersonsProps> = ({ persons, filterName, setPersons }) => {
-
+const Persons: React.FC<PersonsProps> = ({ persons, filterName, setPersons, setNotification }) => {
     const handleDelete = (id: number) => {
         const personToDelete = persons.find(person => person.id === id);
         if (!personToDelete) return;
@@ -18,7 +19,15 @@ const Persons: React.FC<PersonsProps> = ({ persons, filterName, setPersons }) =>
         if (confirmDelete) {
             personsService.deletePerson(id).then(() => {
                 setPersons(persons.filter((person: Person) => person.id !== personToDelete.id));
-            }).catch(error => alert(`Error deleting person: ${error}`));
+            }).catch(() => {
+                setNotification({
+                    message: `Information of ${personToDelete.name} has already been removed from server`,
+                    type: "error"
+                });
+                setTimeout(() => {
+                    setNotification({ message: null, type: "error" });
+                }, 2000);
+            })
         }
     }
 
