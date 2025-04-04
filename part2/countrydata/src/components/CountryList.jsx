@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import countryService from '../services/countryService'
-import Country from './Country'
+import CountryDetail from './CountryDetail'
+import CountryListItem from './CountryListItem'
 
 const CountryList = ({ filter }) => {
     const [countries, setCountries] = useState([])
@@ -27,15 +28,13 @@ const CountryList = ({ filter }) => {
 
     return (
         <div>
-            {filteredCountries.length >= 10 ? (
+            {filteredCountries.length > 10 ? (
                 <p>Too many matches, specify another filter</p>
             ) : filteredCountries.length === 1 ? (
-                <Country country={filteredCountries[0]} />
+                <CountryDetail country={filteredCountries[0]} />
             ) : (
                 filteredCountries.map(country => (
-                    <div key={country.cca3}>
-                        <h3>{country.name.common}</h3>
-                    </div>
+                    <CountryListItem key={country.name.common} country={country} />
                 ))
             )}
         </div>

@@ -5,7 +5,7 @@ const Filter = ({ filter, setFilter }) => {
 
     return (
         <div>
-            <label for="filter">Find conuntries</label>
+            <label htmlFor="filter">Find countries</label>
             <input type="text" id="filter" placeholder="Search for a country..." value={filter} onChange={onFilterChange} />
         </div>
     );
