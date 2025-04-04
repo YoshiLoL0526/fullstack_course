@@ -34,8 +34,8 @@ const Persons: React.FC<PersonsProps> = ({ persons, filterName, setPersons, setN
     return (
         <div>
             {persons
-                .filter((person: Person) => person.name.toLowerCase().includes(filterName.toLowerCase()))
-                .map((person: Person) => (
+                .filter((person) => person.name.toLowerCase().includes(filterName.toLowerCase()))
+                .map((person) => (
                     <p key={person.id}>
                         {person.name} {person.number}
                         <button onClick={() => handleDelete(person.id)}>Delete</button>
